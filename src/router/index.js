@@ -7,7 +7,7 @@ export default new Router({
     routes: [
         {
             path: '/',
-            redirect: '/login'
+            redirect: '/readme'
         },
         {
             path: '/readme',
@@ -48,12 +48,40 @@ export default new Router({
                 {
                     path: '/drag',
                     component: resolve => require(['../components/page/DragList.vue'], resolve)    // 拖拽列表组件
+                },
+                {
+                    path: '/itermbase',
+                    component: resolve => require(['../components/page/ItermBase.vue'], resolve)    // 拖拽列表组件
+                },
+                {
+                    path: '/personinfo',
+                    component: resolve => require(['../components/page/PersonInfo.vue'], resolve)    // 拖拽列表组件
+                },
+                {
+                    path: '/userinfo',
+                    component: resolve => require(['../components/page/UserInfo.vue'], resolve)    // 拖拽列表组件
+                },
+                {
+                    path: '/examadmin',
+                    component: resolve => require(['../components/page/ExamAdmin.vue'], resolve)    // 拖拽列表组件
+                },
+                {
+                    path: '/examinfo',
+                    component: resolve => require(['../components/page/ExamInfo.vue'], resolve)    // 拖拽列表组件
+                },
+                {
+                    path: '/taskinfo',
+                    component: resolve => require(['../components/page/TaskInfo.vue'], resolve)    // 拖拽列表组件
+                },
+                {
+                    path: '/taskadmin',
+                    component: resolve => require(['../components/page/TaskAdmin.vue'], resolve)    // 拖拽列表组件
                 }
             ]
         },
         {
-            path: '/login',
-            component: resolve => require(['../components/page/Login.vue'], resolve)
+            path: '/readme',
+            component: resolve => require(['../components/common/Home.vue'], resolve)
         },
     ]
 })

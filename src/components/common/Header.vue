@@ -1,6 +1,6 @@
 <template>
     <div class="header">
-        <div class="logo">后台管理系统</div>
+        <div class="logo">软件工程管理系统</div>
         <div class="user-info">
             <el-dropdown trigger="click" @command="handleCommand">
                 <span class="el-dropdown-link">
@@ -18,13 +18,23 @@
     export default {
         data() {
             return {
-                name: 'linxin'
+                session: {},                //?admin=0&username=lily&u=1&i=1&o=1
+                username: ''
             }
         },
-        computed:{
-            username(){
-                let username = localStorage.getItem('ms_username');
-                return username ? username : this.name;
+        mounted() {
+            var url = window.location.href;
+            if(url.split('?').length > 1) {
+                var paramArr = url.split('?')[1].split('&');
+                this.session[paramArr[0].split('=')[0]] = paramArr[0].split('=')[1];
+                this.session[paramArr[1].split('=')[0]] = paramArr[1].split('=')[1];
+                this.session[paramArr[2].split('=')[0]] = paramArr[2].split('=')[1];
+                this.session[paramArr[3].split('=')[0]] = paramArr[3].split('=')[1];
+                this.session[paramArr[4].split('=')[0]] = paramArr[4].split('=')[1];
+                this.username = this.session.username;
+                window.localStorage.setItem("session", window.JSON.stringify((this.session)));
+            } else {
+                this.username = window.JSON.parse(localStorage.getItem("session")).username;
             }
         },
         methods:{

@@ -23,66 +23,105 @@
     export default {
         data() {
             return {
-                items: [
-                    {
-                        icon: 'el-icon-setting',
-                        index: 'readme',
-                        title: '自述'
-                    },
-                    {
-                        icon: 'el-icon-menu',
-                        index: '2',
-                        title: '表格',
-                        subs: [
-                            {
-                                index: 'basetable',
-                                title: '基础表格'
-                            },
-                            {
-                                index: 'vuetable',
-                                title: 'Vue表格组件'
-                            }
-                        ]
-                    },
-                    {
-                        icon: 'el-icon-date',
-                        index: '3',
-                        title: '表单',
-                        subs: [
-                            {
-                                index: 'baseform',
-                                title: '基本表单'
-                            },
-                            {
-                                index: 'vueeditor',
-                                title: '编辑器'
-                            },
-                            {
-                                index: 'markdown',
-                                title: 'markdown'
-                            },
-                            {
-                                index: 'upload',
-                                title: '文件上传'
-                            }
-                        ]
-                    },
-                    {
-                        icon: 'el-icon-star-on',
-                        index: 'basecharts',
-                        title: '图表'
-                    },
-                    {
-                        icon: 'el-icon-upload2',
-                        index: 'drag',
-                        title: '拖拽'
-                    }
+                session: {},
+                items: [{
+                    index: 'readme',
+                    title: '主页'
+                },
+                {
+                    index: 'personinfo',
+                    title: '个人信息管理'
+                }
+//                    {
+//                        icon: 'el-icon-setting',
+//                        index: 'readme',
+//                        title: '自述'
+//                    },
+//                    {
+//                        icon: 'el-icon-menu',
+//                        index: '2',
+//                        title: '表格',
+//                        subs: [
+//                            {
+//                                index: 'basetable',
+//                                title: '基础表格'
+//                            },
+//                            {
+//                                index: 'vuetable',
+//                                title: 'Vue表格组件'
+//                            }
+//                        ]
+//                    },
+//                    {
+//                        icon: 'el-icon-date',
+//                        index: '3',
+//                        title: '表单',
+//                        subs: [
+//                            {
+//                                index: 'baseform',
+//                                title: '基本表单'
+//                            },
+//                            {
+//                                index: 'vueeditor',
+//                                title: '编辑器'
+//                            },
+//                            {
+//                                index: 'markdown',
+//                                title: 'markdown'
+//                            },
+//                            {
+//                                index: 'upload',
+//                                title: '文件上传'
+//                            }
+//                        ]
+//                    },
+//                    {
+//                        icon: 'el-icon-star-on',
+//                        index: 'basecharts',
+//                        title: '图表'
+//                    },
+//                    {
+//                        icon: 'el-icon-upload2',
+//                        index: 'drag',
+//                        title: '拖拽'
+//                    }
                 ]
             }
         },
         computed:{
             onRoutes(){
                 return this.$route.path.replace('/','');
+            }
+        },
+        mounted() {
+            this.session = window.JSON.parse(localStorage.getItem("session"));
+            if(this.session.admin == 0) {       // superAdmin
+                this.items.push({
+                    index: 'itermbase',
+                    title: '设置学期基点'
+                });
+                this.items.push({
+                    index: 'userinfo',
+                    title: '用户信息管理'
+                });
+            } else if(this.session.admin == 1) {      // admin
+                this.items.push({
+                    title: '监考管理',
+                    index: 'examadmin',
+                });
+                this.items.push({
+                    title: '任务管理',
+                    index: 'taskadmin'
+                });
+            } else if(this.session.admin == 2) {                  // teacher
+                this.items.push({
+                    title: '监考信息',
+                    index: 'examinfo',
+                });
+                this.items.push({
+                    title: '任务信息',
+                    index: 'taskinfo',
+                });
             }
         }
     }
